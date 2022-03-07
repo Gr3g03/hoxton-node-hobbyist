@@ -22,20 +22,20 @@ const users = [
 
 const hobies = [
     {
-        name: 'My first post',
-        photo: 'Welcome to my first post',
+        name: 'walking',
+        photo: 'img.jpg',
         active: true,
         userId: 1
     },
     {
-        name: 'My second post',
-        photo: 'Welcome to my second post',
+        name: 'running',
+        photo: 'img.jpg',
         active: true,
         userId: 1
     },
     {
-        name: 'This is cool',
-        photo: 'My first post, too!',
+        name: 'coding',
+        photo: 'img.jpg',
         active: true,
         userId: 2
     }

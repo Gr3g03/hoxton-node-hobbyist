@@ -21,6 +21,40 @@ app.get('/users', async (req, res) => {
 })
 
 
+app.get('/users/:id', async (req, res) => {
+
+    const idParam = Number(req.params.id)
+
+    const user = await prisma.user.findFirst({
+        where: { id: idParam },
+        include: { Hobie: true }
+    })
+
+    if (user) {
+        res.send(user)
+    }
+
+    else {
+        res.status(404).send({ error: 'User not found.' })
+    }
+
+})
+
+app.post('/users', async (req, res) => {
+
+    const { email, fullname, photo } = req.body
+
+    const newUser = {
+        email: email,
+        fullname: fullname,
+        photo: photo
+    }
+
+    await prisma.user.create({ data: newUser })
+
+})
+
+
 app.listen(4000, () => {
     console.log(`Server up: http://localhost:4000`)
 })
