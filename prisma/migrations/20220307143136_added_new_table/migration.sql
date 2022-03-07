@@ -1,0 +1,8 @@
+-- CreateTable
+CREATE TABLE "userHobie" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "hobieId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
+    CONSTRAINT "userHobie_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "userHobie_hobieId_fkey" FOREIGN KEY ("hobieId") REFERENCES "Hobie" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
