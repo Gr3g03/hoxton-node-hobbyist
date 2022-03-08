@@ -1,13 +1,18 @@
-/*
-  Warnings:
+-- CreateTable
+CREATE TABLE "User" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "fullName" TEXT,
+    "photo" TEXT NOT NULL,
+    "email" TEXT NOT NULL
+);
 
-  - You are about to drop the `UserHobbies` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-PRAGMA foreign_keys=off;
-DROP TABLE "UserHobbies";
-PRAGMA foreign_keys=on;
+-- CreateTable
+CREATE TABLE "Hobby" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "photo" TEXT NOT NULL,
+    "active" BOOLEAN NOT NULL
+);
 
 -- CreateTable
 CREATE TABLE "_HobbyToUser" (

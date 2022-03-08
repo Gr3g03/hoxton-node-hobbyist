@@ -1,69 +1,62 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client'
 
+const prisma = new PrismaClient({ log: ['query', 'error', 'warn', 'info'] })
 
-const prisma = new PrismaClient()
-
-
-const hobies = [
+const hobbies = [
     {
-        name: 'walking',
-        photo: 'img.jpg',
+        name: 'Knitting',
+        photo: 'knitting.jpg',
+        active: false
+    },
+    {
+        name: 'Rugby',
+        photo: 'rugby.jpg',
         active: true
     },
     {
-        name: 'running',
-        photo: 'img.jpg',
+        name: 'Cooking',
+        photo: 'cooking.jpg',
         active: true
     },
     {
-        name: 'coding',
-        photo: 'img.jpg',
+        name: 'Anime',
+        photo: 'anime.jpg',
         active: false
     }
 ]
 
 const users = [
     {
-        fullName: 'Grigori Godolja',
-        photo: 'img.jpg',
-        email: 'grigorgodole@mail.com',
+        fullName: 'Nicolas',
+        photo: 'nico.jpeg',
+        email: 'nicolas@email.com',
         hobbies: {
-            connect: [{ name: 'Knitting' }, { name: 'Rugby' }]
+            connect: [{ name: 'Knitting' }]
         }
     },
     {
-        fullName: 'Nicolas Marcora',
-        photo: 'img.jpg',
-        email: 'nicolasmarcora@mail.com',
-        hobbies: {
-            connect: [{ name: 'Rugby' }, { name: 'Anime' }]
-        }
+        fullName: 'Rinor',
+        photo: 'rinor.jpeg',
+        email: 'rinor@email.com'
     },
     {
-        fullName: 'Ed putans',
-        photo: 'img.jpg',
-        email: 'edputans@mail.com',
-        hobbies: {
-            connect: [{ name: 'Knitting' }, { name: 'Cooking' }]
-        }
-    }
+        fullName: 'Arita',
+        photo: 'arita.jpeg',
+        email: 'arita@email.com'
 
+    }
 ]
 
-
-
-
-async function createStuf() {
-
-    for (const hobby of hobies) {
-        await prisma.hobby.create({ data: hobby })
-    }
+async function createStuff() {
+    // for (const hobby of hobbies) {
+    //     //@ts-ignore
+    //     await prisma.hobby.create({ data: hobby })
+    // }
 
     for (const user of users) {
+        //@ts-ignore
         await prisma.user.create({ data: user })
     }
-
-
 }
 
-createStuf()
+createStuff()
