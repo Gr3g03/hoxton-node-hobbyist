@@ -7,63 +7,56 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient({ log: ['query', 'error', 'warn', 'info'] })
+
+
+
+app.get('/hobbies', async (req, res) => {
+
+    let hobbies = await prisma.hobby.findMany({ include: { User: true } })
+    res.send(hobbies)
+})
+
 
 
 app.get('/users', async (req, res) => {
 
-    const users = await prisma.user.findMany({
-        include: { userHobbies: true }
-    })
-
+    let users = await prisma.user.findMany({ include: { Hobby: true } })
     res.send(users)
-
 })
 
+// app.get('/users/:id', async (req, res) => {
 
-app.get('/hobies', async (req, res) => {
+//     const idParam = Number(req.params.id)
 
-    const users = await prisma.hobby.findMany({
-        include: { userHobbies: true }
-    })
+//     const user = await prisma.user.findFirst({
+//         where: { id: idParam },
+//         include: { userHobbies: true }
+//     })
 
-    res.send(users)
+//     if (user) {
+//         res.send(user)
+//     }
 
-})
+//     else {
+//         res.status(404).send({ error: 'User not found.' })
+//     }
 
+// })
 
-app.get('/users/:id', async (req, res) => {
+// app.post('/users', async (req, res) => {
 
-    const idParam = Number(req.params.id)
+//     const { email, fullname, photo } = req.body
 
-    const user = await prisma.user.findFirst({
-        where: { id: idParam },
-        include: { userHobbies: true }
-    })
+//     const newUser = {
+//         email: email,
+//         fullname: fullname,
+//         photo: photo
+//     }
 
-    if (user) {
-        res.send(user)
-    }
+//     await prisma.user.create({ data: newUser })
 
-    else {
-        res.status(404).send({ error: 'User not found.' })
-    }
-
-})
-
-app.post('/users', async (req, res) => {
-
-    const { email, fullname, photo } = req.body
-
-    const newUser = {
-        email: email,
-        fullname: fullname,
-        photo: photo
-    }
-
-    await prisma.user.create({ data: newUser })
-
-})
+// })
 
 
 app.listen(4000, () => {

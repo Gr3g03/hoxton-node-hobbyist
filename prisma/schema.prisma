@@ -11,25 +11,17 @@ datasource db {
 }
 
 model User {
-  id          Int           @id @default(autoincrement())
-  fullName    String?
-  photo       String
-  email       String
-  userHobbies UserHobbies[]
+  id       Int     @id @default(autoincrement())
+  fullName String?
+  photo    String
+  email    String
+  Hobby    Hobby[]
 }
 
 model Hobby {
-  id          Int           @id @default(autoincrement())
-  name        String
-  photo       String
-  active      Boolean
-  userHobbies UserHobbies[]
-}
-
-model UserHobbies {
-  id     Int   @id @default(autoincrement())
-  userId Int
-  user   User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  hobyId Int
-  hobby  Hobby @relation(fields: [hobyId], references: [id], onDelete: Cascade)
+  id     Int     @id @default(autoincrement())
+  name   String
+  photo  String
+  active Boolean
+  User   User[]
 }
