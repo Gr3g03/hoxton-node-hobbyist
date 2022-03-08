@@ -13,7 +13,18 @@ const prisma = new PrismaClient()
 app.get('/users', async (req, res) => {
 
     const users = await prisma.user.findMany({
-        include: { Hobie: true }
+        include: { userHobbies: true }
+    })
+
+    res.send(users)
+
+})
+
+
+app.get('/hobies', async (req, res) => {
+
+    const users = await prisma.hobby.findMany({
+        include: { userHobbies: true }
     })
 
     res.send(users)
@@ -27,7 +38,7 @@ app.get('/users/:id', async (req, res) => {
 
     const user = await prisma.user.findFirst({
         where: { id: idParam },
-        include: { Hobie: true }
+        include: { userHobbies: true }
     })
 
     if (user) {

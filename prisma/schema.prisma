@@ -1,5 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,18 +11,25 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  fullName String?
-  photo    String
-  email    String
-  Hobie    Hobie[]
+  id          Int           @id @default(autoincrement())
+  fullName    String?
+  photo       String
+  email       String
+  userHobbies UserHobbies[]
 }
 
-model Hobie {
-  id     Int     @id @default(autoincrement())
-  name   String
-  photo  String
-  active Boolean
-  User   User    @relation(fields: [userId], references: [id])
+model Hobby {
+  id          Int           @id @default(autoincrement())
+  name        String
+  photo       String
+  active      Boolean
+  userHobbies UserHobbies[]
+}
+
+model UserHobbies {
+  id     Int   @id @default(autoincrement())
   userId Int
+  user   User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  hobyId Int
+  hobby  Hobby @relation(fields: [hobyId], references: [id], onDelete: Cascade)
 }

@@ -5,17 +5,21 @@ const prisma = new PrismaClient()
 
 
 
-
 const users = [
     {
         fullName: 'Grigori Godolja',
-        email: 'grigorgodole@mail.com',
-        photo: 'img.jpg'
+        photo: 'img.jpg',
+        email: 'grigorgodole@mail.com'
     },
     {
         fullName: 'Nicolas Marcora',
-        email: 'nicolasmarcora@mail.com',
-        photo: 'img.jpg'
+        photo: 'img.jpg',
+        email: 'nicolasmarcora@mail.com'
+    },
+    {
+        fullName: 'Ed putans',
+        photo: 'img.jpg',
+        email: 'edputans@mail.com'
     }
 
 ]
@@ -24,32 +28,53 @@ const hobies = [
     {
         name: 'walking',
         photo: 'img.jpg',
-        active: true,
-        userId: 1
+        active: true
     },
     {
         name: 'running',
         photo: 'img.jpg',
-        active: true,
-        userId: 1
+        active: true
     },
     {
         name: 'coding',
         photo: 'img.jpg',
-        active: true,
-        userId: 2
+        active: false
     }
 ]
 
 
-async function createStuff() {
+const usersHobbies = [
+    {
+        userId: 1,
+        hobyId: 2
+    },
+    {
+        userId: 1,
+        hobyId: 3
+    },
+    {
+        userId: 2,
+        hobyId: 3
+    },
+    {
+        userId: 3,
+        hobyId: 2
+    }
+]
+
+
+async function createStuf() {
     for (const user of users) {
         await prisma.user.create({ data: user })
     }
-    for (const hobbie of hobies) {
-        await prisma.hobie.create({ data: hobbie })
+
+    for (const hobby of hobies) {
+        await prisma.hobby.create({ data: hobby })
     }
 
+    for (const usersHobby of usersHobbies) {
+        await prisma.userHobbies.create({ data: usersHobby })
+    }
 }
 
-createStuff()
+createStuf()
